@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,25 +25,25 @@ public class BookInfoController {
     private BookService bookService;
 
     @PostMapping("/book")
-    public Book createBook(Book book) {
+    public Book createBook(@RequestBody Book book) {
         LOGGER.info("Creating book: {}", book);
         return bookService.createBook(book);
     }
 
     @GetMapping("/book/{id}")
-    public Book getBookById(Long id) {
+    public Book getBookById(@PathVariable("id") Long id) {
         LOGGER.info("Getting book with id: {}", id);
         return bookService.getBookById(id);
     }
 
     @PutMapping("/book/{id}")
-    public Book updateBook(Book book) {
+    public Book updateBook(@PathVariable("id") Long id, @RequestBody Book book) {
         LOGGER.info("Updating book: {}", book);
         return bookService.updateBook(book);
     }
 
     @DeleteMapping("/book/{id}")
-    public void deleteBook(Long id) {
+    public void deleteBook(@PathVariable("id") Long id) {
         LOGGER.info("Deleting book with id: {}", id);
         bookService.deleteBook(id);
     }
