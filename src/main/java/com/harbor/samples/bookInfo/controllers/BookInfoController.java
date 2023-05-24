@@ -24,7 +24,7 @@ public class BookInfoController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/book")
+    @PostMapping(value = "/book", consumes = "application/json", produces = "application/json")
     public Book createBook(@RequestBody Book book) {
         LOGGER.info("Creating book: {}", book);
         return bookService.createBook(book);
@@ -36,7 +36,7 @@ public class BookInfoController {
         return bookService.getBookById(id);
     }
 
-    @PutMapping("/book/{id}")
+    @PutMapping(value = "/book/{id}", consumes = "application/json", produces = "application/json")
     public Book updateBook(@PathVariable("id") Long id, @RequestBody Book book) {
         LOGGER.info("Updating book: {}", book);
         return bookService.updateBook(book);
