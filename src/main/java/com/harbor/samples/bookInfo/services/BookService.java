@@ -1,8 +1,7 @@
 package com.harbor.samples.bookInfo.services;
 
 import java.util.List;
-
-import javax.persistence.EntityManager;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.harbor.samples.bookInfo.models.Book;
+import com.harbor.samples.bookInfo.models.BookDTO;
 import com.harbor.samples.bookInfo.repositories.BookRepo;
 import com.harbor.samples.bookInfo.repositories.CustomBookRepo;
 
@@ -43,8 +43,8 @@ public class BookService {
         bookRepo.deleteById(id);
     }
 
-    public List<Book> getBookByName(String name) {
+    public List<BookDTO> getBookByName(String name) {
         LOGGER.info("Getting book with name: {}", name);
-        return customRepo.getBookByName(name);
+        return customRepo.getBookByName(name).stream().map(book -> book.convertToDto()).collect(Collectors.toList());
     }
 }

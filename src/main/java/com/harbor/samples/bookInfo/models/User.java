@@ -17,11 +17,11 @@ import org.springframework.lang.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "book")
-@Entity(name = "book")
+@Table(name = "user")
+@Entity(name = "user")
 @Getter
 @Setter
-public class Book implements Serializable {
+public class User implements Serializable {
     @Autowired
     @Transient
     private ModelMapper modelMapper;
@@ -30,24 +30,22 @@ public class Book implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String title;
-    private String author;
+    private String firstName;
+    private String lastName;
 
+    private String emailId;
     @Nullable
-    private String isbn;
-    @Nullable
-    private String publisher;
+    private String mobileNumber;
 
     private long createdAt;
 
-    @Nullable
-    private String creditCardNumber;
+    private String loginName;
 
-    @OneToMany(mappedBy = "forBook")
+    @OneToMany(mappedBy="byUser")
     private Set<Review> reviews;
 
-    public BookDTO convertToDto() {
-        BookDTO bookDTO = modelMapper.map(this, BookDTO.class);
-        return bookDTO;
+    public UserDTO convertToDto() {
+        UserDTO userDto = modelMapper.map(this, UserDTO.class);
+        return userDto;
     }
 }

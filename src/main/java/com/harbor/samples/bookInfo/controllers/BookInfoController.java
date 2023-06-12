@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.harbor.samples.bookInfo.models.Book;
+import com.harbor.samples.bookInfo.models.BookDTO;
 import com.harbor.samples.bookInfo.services.BookService;
 
 @RestController
@@ -25,21 +26,25 @@ public class BookInfoController {
     private BookService bookService;
 
     @PostMapping(value = "/book", consumes = "application/json", produces = "application/json")
-    public Book createBook(@RequestBody Book book) {
-        LOGGER.info("Creating book: {}", book);
-        return bookService.createBook(book);
+    public BookDTO createBook(@RequestBody BookDTO bookDto) {
+        LOGGER.info("Creating book: {}", bookDto);
+        Book book = bookDto.convertToBook();
+        LOGGER.info("Converted book: {}", book);
+        return bookService.createBook(book).convertToDto();
     }
 
     @GetMapping("/book/{id}")
-    public Book getBookById(@PathVariable("id") Long id) {
+    public BookDTO getBookById(@PathVariable("id") Long id) {
         LOGGER.info("Getting book with id: {}", id);
-        return bookService.getBookById(id);
+        return bookService.getBookById(id).convertToDto();
     }
 
     @PutMapping(value = "/book/{id}", consumes = "application/json", produces = "application/json")
-    public Book updateBook(@PathVariable("id") Long id, @RequestBody Book book) {
-        LOGGER.info("Updating book: {}", book);
-        return bookService.updateBook(book);
+    public BookDTO updateBook(@PathVariable("id") Long id, @RequestBody BookDTO bookDto) {
+        LOGGER.info("Updating book: {}", bookDto);
+        Book book = bookDto.convertToBook();
+        LOGGER.info("Converted book: {}", book);
+        return bookService.updateBook(book).convertToDto();
     }
 
     @DeleteMapping("/book/{id}")
@@ -49,7 +54,7 @@ public class BookInfoController {
     }
 
     @GetMapping("/getBookByName")
-    public List<Book> getBookByName(@RequestParam("bookName") String name) {
+    public List<BookDTO> getBookByName(@RequestParam("bookName") String name) {
         LOGGER.info("Getting book with name: {}", name);
         return bookService.getBookByName(name);
     }
