@@ -2,7 +2,12 @@
   "openapi": "3.0.1",
   "info": { "title": "OpenAPI definition", "version": "v0" },
   "servers":
-    [{ "url": "http://localhost:8888", "description": "Generated server url" }],
+    [
+      {
+        "url": "https://buggy.tech.goharbor.com",
+        "description": "Generated server url",
+      },
+    ],
   "paths":
     {
       "/user/{id}":
