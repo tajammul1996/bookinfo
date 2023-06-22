@@ -3,15 +3,13 @@ package com.harbor.samples.bookInfo.models;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 
 import lombok.Getter;
@@ -22,9 +20,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Book implements Serializable {
-    @Autowired
-    @Transient
-    private ModelMapper modelMapper;
 
     @Id
     @GeneratedValue
@@ -38,6 +33,7 @@ public class Book implements Serializable {
     @Nullable
     private String publisher;
 
+    @Column(name="creationTimestamp")
     private long createdAt;
 
     @Nullable
@@ -45,9 +41,4 @@ public class Book implements Serializable {
 
     @OneToMany(mappedBy = "forBook")
     private Set<Review> reviews;
-
-    public BookDTO convertToDto() {
-        BookDTO bookDTO = modelMapper.map(this, BookDTO.class);
-        return bookDTO;
-    }
 }

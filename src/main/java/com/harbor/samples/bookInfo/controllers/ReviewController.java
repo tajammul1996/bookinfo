@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.harbor.samples.bookInfo.DTOUtils;
 import com.harbor.samples.bookInfo.models.Review;
 import com.harbor.samples.bookInfo.models.ReviewDTO;
 import com.harbor.samples.bookInfo.services.ReviewService;
@@ -22,25 +23,28 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private DTOUtils dtoUtils;
+
     @PostMapping(value = "/review", consumes = "application/json", produces = "application/json")
     public ReviewDTO createReview(@RequestBody ReviewDTO reviewDto) {
         LOGGER.info("Creating review: {}", reviewDto);
-        Review review = reviewDto.convertToReview();
+        Review review = dtoUtils.convertToReview(reviewDto);
         LOGGER.info("Mapped review: {}", review);
-        return reviewService.createReview(review).convertToDto();
+        return dtoUtils.convertToReviewDTO(reviewService.createReview(review));
     }
 
     @GetMapping("/review/{id}")
     public ReviewDTO getReviewById(@PathVariable("id") Long id) {
         LOGGER.info("Getting review with id: {}", id);
-        return reviewService.getReviewById(id).convertToDto();
+        return dtoUtils.convertToReviewDTO(reviewService.getReviewById(id));
     }
 
     @PutMapping(value = "/review/{id}", consumes = "application/json", produces = "application/json")
     public ReviewDTO updateReview(@PathVariable("id") Long id, @RequestBody ReviewDTO reviewDto) {
         LOGGER.info("Updating review: {}", reviewDto);
-        Review review = reviewDto.convertToReview();
-        return reviewService.updateReview(review).convertToDto();
+        Review review = dtoUtils.convertToReview(reviewDto);
+        return dtoUtils.convertToReviewDTO(reviewService.updateReview(review));
     }
 
     @DeleteMapping("/review/{id}")
