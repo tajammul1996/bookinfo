@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.harbor.samples.bookInfo.DTOUtils;
 import com.harbor.samples.bookInfo.models.Book;
 import com.harbor.samples.bookInfo.models.BookDTO;
 import com.harbor.samples.bookInfo.services.BookService;
@@ -25,26 +26,29 @@ public class BookInfoController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private DTOUtils dtoUtils;
+
     @PostMapping(value = "/book", consumes = "application/json", produces = "application/json")
     public BookDTO createBook(@RequestBody BookDTO bookDto) {
         LOGGER.info("Creating book: {}", bookDto);
-        Book book = bookDto.convertToBook();
+        Book book = dtoUtils.convertToBook(bookDto);
         LOGGER.info("Converted book: {}", book);
-        return bookService.createBook(book).convertToDto();
+        return  dtoUtils.convertToBookDTO(bookService.createBook(book));
     }
 
     @GetMapping("/book/{id}")
     public BookDTO getBookById(@PathVariable("id") Long id) {
         LOGGER.info("Getting book with id: {}", id);
-        return bookService.getBookById(id).convertToDto();
+        return dtoUtils.convertToBookDTO(bookService.getBookById(id));
     }
 
     @PutMapping(value = "/book/{id}", consumes = "application/json", produces = "application/json")
     public BookDTO updateBook(@PathVariable("id") Long id, @RequestBody BookDTO bookDto) {
         LOGGER.info("Updating book: {}", bookDto);
-        Book book = bookDto.convertToBook();
+        Book book = dtoUtils.convertToBook(bookDto);
         LOGGER.info("Converted book: {}", book);
-        return bookService.updateBook(book).convertToDto();
+        return dtoUtils.convertToBookDTO(bookService.updateBook(book));
     }
 
     @DeleteMapping("/book/{id}")

@@ -8,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 
 import lombok.Getter;
@@ -22,9 +19,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User implements Serializable {
-    @Autowired
-    @Transient
-    private ModelMapper modelMapper;
 
     @Id
     @GeneratedValue
@@ -43,9 +37,4 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy="byUser")
     private Set<Review> reviews;
-
-    public UserDTO convertToDto() {
-        UserDTO userDto = modelMapper.map(this, UserDTO.class);
-        return userDto;
-    }
 }

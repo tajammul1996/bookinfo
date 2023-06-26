@@ -3,10 +3,10 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-  - url: 'http://buggy.tech.goharbor.com'
+  - url: "http://buggy.tech.goharbor.com"
     description: Generated server url
 paths:
-  '/user/{id}':
+  "/user/{id}":
     get:
       tags:
         - user-controller
@@ -19,12 +19,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: "#/components/schemas/UserDTO"
     put:
       tags:
         - user-controller
@@ -40,15 +40,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserDTO'
+              $ref: "#/components/schemas/UserDTO"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: "#/components/schemas/UserDTO"
     delete:
       tags:
         - user-controller
@@ -61,9 +61,9 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: OK
-  '/review/{id}':
+  "/review/{id}":
     get:
       tags:
         - review-controller
@@ -76,12 +76,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ReviewDTO'
+                $ref: "#/components/schemas/ReviewDTO"
     put:
       tags:
         - review-controller
@@ -97,15 +97,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewDTO'
+              $ref: "#/components/schemas/ReviewDTO"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReviewDTO'
+                $ref: "#/components/schemas/ReviewDTO"
     delete:
       tags:
         - review-controller
@@ -118,9 +118,9 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: OK
-  '/book/{id}':
+  "/book/{id}":
     get:
       tags:
         - book-info-controller
@@ -133,12 +133,12 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/BookDTO'
+                $ref: "#/components/schemas/BookDTO"
     put:
       tags:
         - book-info-controller
@@ -154,15 +154,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BookDTO'
+              $ref: "#/components/schemas/BookDTO"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BookDTO'
+                $ref: "#/components/schemas/BookDTO"
     delete:
       tags:
         - book-info-controller
@@ -175,7 +175,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: OK
   /user:
     post:
@@ -186,15 +186,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserDTO'
+              $ref: "#/components/schemas/UserDTO"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: "#/components/schemas/UserDTO"
   /review:
     post:
       tags:
@@ -204,15 +204,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewDTO'
+              $ref: "#/components/schemas/ReviewDTO"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReviewDTO'
+                $ref: "#/components/schemas/ReviewDTO"
   /book:
     post:
       tags:
@@ -222,15 +222,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BookDTO'
+              $ref: "#/components/schemas/BookDTO"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BookDTO'
+                $ref: "#/components/schemas/BookDTO"
   /getBookByName:
     get:
       tags:
@@ -243,14 +243,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/BookDTO'
+                  $ref: "#/components/schemas/BookDTO"
 components:
   schemas:
     ReviewDTO:
@@ -298,7 +298,7 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/ReviewDTO'
+            $ref: "#/components/schemas/ReviewDTO"
     BookDTO:
       type: object
       properties:
@@ -322,4 +322,4 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/ReviewDTO'
+            $ref: "#/components/schemas/ReviewDTO"

@@ -8,10 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +17,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Review implements Serializable {
-    @Autowired
-    @Transient
-    private ModelMapper modelMapper;
 
     @Id
     @GeneratedValue
@@ -44,8 +37,4 @@ public class Review implements Serializable {
     @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
     private Book forBook;
 
-    public ReviewDTO convertToDto() {
-        ReviewDTO reviewDto = modelMapper.map(this, ReviewDTO.class);
-        return reviewDto;
-    }
 }

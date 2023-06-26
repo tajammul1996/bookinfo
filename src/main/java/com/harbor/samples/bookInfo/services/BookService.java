@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.harbor.samples.bookInfo.DTOUtils;
 import com.harbor.samples.bookInfo.models.Book;
 import com.harbor.samples.bookInfo.models.BookDTO;
 import com.harbor.samples.bookInfo.repositories.BookRepo;
@@ -19,6 +20,9 @@ public class BookService {
 
     @Autowired
     private BookRepo bookRepo;
+
+    @Autowired
+    private DTOUtils dtoUtils;
 
     @Autowired
     private CustomBookRepo customRepo;
@@ -45,6 +49,6 @@ public class BookService {
 
     public List<BookDTO> getBookByName(String name) {
         LOGGER.info("Getting book with name: {}", name);
-        return customRepo.getBookByName(name).stream().map(book -> book.convertToDto()).collect(Collectors.toList());
+        return customRepo.getBookByName(name).stream().map(book -> dtoUtils.convertToBookDTO(book)).collect(Collectors.toList());
     }
 }
