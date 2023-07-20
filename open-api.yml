@@ -3,7 +3,7 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-  - url: "http://buggy.tech.goharbor.com"
+  - url: "https://buggy.tech.goharbor.com"
     description: Generated server url
 paths:
   "/user/{id}":
