@@ -63,4 +63,33 @@ public class BookInfoController {
         return bookService.getBookByName(name);
     }
 
+    @PostMapping(value = "/genSpecFail/book", consumes = "application/json", produces = "application/json")
+    public BookDTO createBook(@RequestBody BookDTO bookDto) {
+        LOGGER.info("Creating book: {}", bookDto);
+        Book book = dtoUtils.convertToBook(bookDto);
+        LOGGER.info("Converted book: {}", book);
+        return  dtoUtils.convertToBookDTO(bookService.createBook(book));
+    }
+
+    @GetMapping("/genSpecFail/getBookByName")
+    public List<BookDTO> getBookByName(@RequestParam("bookName") String name) {
+        LOGGER.info("Getting book with name: {}", name);
+        return bookService.getBookByName(name);
+    }
+
+    @PostMapping(value = {"/codepathfailure/book", "/codepathfailure"}, consumes = "application/json", produces = "application/json")
+    public BookDTO createBook(@RequestBody BookDTO bookDto) {
+        LOGGER.info("Creating book: {}", bookDto);
+        Book book = dtoUtils.convertToBook(bookDto);
+        LOGGER.info("Converted book: {}", book);
+        return  dtoUtils.convertToBookDTO(bookService.createBook(book));
+    }
+
+    @GetMapping({"/codepathfailure/getBookByName", "/codepathfailure"})
+    public List<BookDTO> getBookByName(@RequestParam("bookName") String name) {
+        LOGGER.info("Getting book with name: {}", name);
+        return bookService.getBookByName(name);
+    }
+
+
 }
