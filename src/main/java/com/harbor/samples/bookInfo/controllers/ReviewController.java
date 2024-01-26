@@ -29,6 +29,10 @@ public class ReviewController {
     @PostMapping(value = "/review", consumes = "application/json", produces = "application/json")
     public ReviewDTO createReview(@RequestBody ReviewDTO reviewDto) {
         LOGGER.info("Creating review: {}", reviewDto);
+        LOGGER.info("Creating review: {}", reviewDto);
+
+        LOGGER.info("Creating review: {}", reviewDto);
+
         Review review = dtoUtils.convertToReview(reviewDto);
         LOGGER.info("Mapped review: {}", review);
         return dtoUtils.convertToReviewDTO(reviewService.createReview(review));
